@@ -1,6 +1,8 @@
+import slau.decision.MethodGaussZeidel;
+
 public class Main {
     public static void main(String[] args) {
-        MathProcessor mathProcessor = new MathProcessor(CommandLineReader.readCommand());
-        mathProcessor.solve();
+        MethodGaussZeidel methodGaussZeidel = new MethodGaussZeidel(CommandLineReader.readCommand());
+        methodGaussZeidel.solve();
     }
 }

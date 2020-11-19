@@ -12,38 +12,21 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.data.general.Dataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import utils.Adapter.InputData;
 
 import java.awt.*;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LineChartSchedule {
     @Getter
     private static XYSeriesCollection dataset = new XYSeriesCollection();
     private static int i = 0;
     //    private static final long serialVersionUID = 1L;
     private static JFreeChart chart;
-//    @Getter
-//    private final ChartPanel chartPanel;
-
-//    public LineChartShedule() {
-//        chart = ChartFactory.createXYLineChart(
-//                "Демонстрация Spline Renderer",
-//                null,                        // x axis label
-//                null,                        // y axis label
-//                null,                        // data
-//                PlotOrientation.VERTICAL,
-//                true,                        // include legend
-//                false,                       // tooltips
-//                false                        // urls
-//        );
-//        chartPanel = new ChartPanel(chart);
-//
-//        chartPanel.setPreferredSize(new java.awt.Dimension(560, 480));
-//        //setContentPane(chartPanel);
-//    }
 
     public static XYSeriesCollection createDataset() {
         dataset.removeAllSeries();
@@ -73,6 +56,11 @@ public class LineChartSchedule {
         return chart;
     }
 
+    public static JFreeChart getChart(XYDataset dataset) {
+        chart = ChartFactory.createXYLineChart("Schedule", "X", "Y", dataset);
+        return chart;
+    }
+
     public static JFreeChart createChart(JFreeChart chart, final XYSeriesCollection dataset) {
         chart.setBackgroundPaint(Color.white);
 
@@ -87,7 +75,7 @@ public class LineChartSchedule {
 
         // Скрытие осевых линий и меток делений
         ValueAxis axis = plot.getDomainAxis();
-        //axis.setAxisLineVisible(false);    // осевая линия
+        axis.setAxisLineVisible(false);    // осевая линия
 
         // Настройка NumberAxis
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();

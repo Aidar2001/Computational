@@ -186,7 +186,7 @@ class Frame extends JFrame {
     private ArrayList<InputData> inputByHand() {
 
         GroupLayout inputPanelLayout = (GroupLayout) inputDataPanel.getLayout();
-        JLabel limitsLabel = new JLabel("Пределы интегрирования:");
+        JLabel limitsLabel = new JLabel("Интервал изоляции корня:");
         JLabel downLimitLabel = new JLabel("a");
         JLabel upLimitLabel = new JLabel("b");
         NumberFormat format = NumberFormat.getInstance();

@@ -43,27 +43,35 @@ public class Adapter {
     public void solve() {
         AbstractNonlinearEquationMathMethod method = mathMethod.getInstance();
         printEnteredValues();
-        HashSet<OutputData> roots = new HashSet<>();
+//        HashSet<OutputData> roots = new HashSet<>();
         double lowLimit = InputData.LOW_LIMIT.getVal();
         double upLimit = InputData.UP_LIMIT.getVal();
         double accuracy = InputData.ACCURACY.getVal();
-        intervalsIsolation.keySet().stream().filter(a -> (isPointOnInterval(lowLimit, upLimit, a) ||
-                isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(a))))
-                .collect(Collectors.toList()).forEach(o -> {
-            try {
-                if (isPointOnInterval(lowLimit, upLimit, o) && !isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(o))) {  // левый конец интервала изоляции корня
-                    roots.add(method.solve(o, upLimit, accuracy));                                                 // входит в введенный интервал но не правый
-                } else if (!isPointOnInterval(lowLimit, upLimit, o) && isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(o))) { // правый конец интервала изоляции корня
-                    roots.add(method.solve(lowLimit, intervalsIsolation.get(o), accuracy));                              // входит в введенный интервал но не левый
-                } else roots.add(method.solve(o, intervalsIsolation.get(o), accuracy));
-            } catch (NoRootsException | NullPointerException noRoots) {
-                roots.add(null);
-            } catch (VerificationException verificationException) {
-                System.out.println(verificationException.getMessage());
-            }
-        });
-        System.out.print("Ответ: ");
-        roots.stream().filter(Objects::nonNull).sorted().collect(Collectors.toList()).forEach(System.out::println);
+//        intervalsIsolation.keySet().stream().filter(a -> (isPointOnInterval(lowLimit, upLimit, a) ||
+//                isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(a))))
+//                .collect(Collectors.toList()).forEach(o -> {
+//            try {
+//                if (isPointOnInterval(lowLimit, upLimit, o) && !isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(o))) {  // левый конец интервала изоляции корня
+//                    roots.add(method.solve(o, upLimit, accuracy));                                                 // входит в введенный интервал но не правый
+//                } else if (!isPointOnInterval(lowLimit, upLimit, o) && isPointOnInterval(lowLimit, upLimit, intervalsIsolation.get(o))) { // правый конец интервала изоляции корня
+//                    roots.add(method.solve(lowLimit, intervalsIsolation.get(o), accuracy));                              // входит в введенный интервал но не левый
+//                } else roots.add(method.solve(o, intervalsIsolation.get(o), accuracy));
+//            } catch (NoRootsException | NullPointerException noRoots) {
+//                roots.add(null);
+//            } catch (VerificationException verificationException) {
+//                System.out.println(verificationException.getMessage());
+//            }
+//        });
+        OutputData outputData = null;
+        try {
+            outputData = method.solve(lowLimit, upLimit, accuracy);
+            System.out.println("Ответ: "+outputData);
+        } catch (NoRootsException | NullPointerException | VerificationException noRoots) {
+            System.out.println(noRoots.getMessage());
+//            roots.add(null);
+        }
+
+//        roots.stream().filter(Objects::nonNull).sorted().collect(Collectors.toList()).forEach(System.out::println);
     }
 
     private boolean isPointOnInterval(double a, double b, double point) {
