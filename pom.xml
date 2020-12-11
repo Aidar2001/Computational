@@ -6,6 +6,7 @@
 
     <groupId>ru.aidar</groupId>
     <artifactId>Computational-Math-Labs</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
@@ -34,6 +35,7 @@
         <module>Computational-Math-Lab_2</module>
         <module>Computational-Math-Lab_3</module>
         <module>Computational-Math-Lab_4</module>
+        <module>Computational-Math-Lab_5</module>
     </modules>
 
 

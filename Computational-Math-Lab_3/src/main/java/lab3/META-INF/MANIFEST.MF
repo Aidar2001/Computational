@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+lab4.lab1.Main-Class: lab3.ui.Frame
+
